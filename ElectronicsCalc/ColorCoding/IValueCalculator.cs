@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ElectronicsCalc.Models;
 
-namespace ElectronicsCalc
+namespace ElectronicsCalc.ColorCoding
 {
     /// <summary>
     /// Interface, possible future functionality to support capacitor color-coding
@@ -31,7 +27,6 @@ namespace ElectronicsCalc
         /// <param name="bandDColor">The color of the tolerance value band.</param>
 
         ValueData CalculateValue(string bandAColor, string bandBColor, string bandCColor, string bandDColor);
-
 
         bool ValidateInputs();
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using ElectronicsCalc;
+using ElectronicsCalc.Ohm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ElectronicsCalcTest

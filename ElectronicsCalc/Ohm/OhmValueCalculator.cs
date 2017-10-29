@@ -1,6 +1,8 @@
 ﻿using System;
+using ElectronicsCalc.ColorCoding;
+using ElectronicsCalc.Models;
 
-namespace ElectronicsCalc
+namespace ElectronicsCalc.Ohm
 {
     public class OhmValueCalculator : IValueCalculator
     {

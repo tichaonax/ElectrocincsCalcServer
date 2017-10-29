@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Owin.Extensions;
+﻿using ElectronicsCalc.Capacitance;
+using ElectronicsCalc.Models;
+using ElectronicsCalc.Ohm;
 using Nancy;
-using Nancy.Owin;
-using Owin;
 
-namespace ElectronicsCalc
+namespace ElectronicsCalc.Api
 {
     public class ElectronicValueCalculator: NancyModule
     {
-        public void Configuration(IAppBuilder app)
+        private readonly OhmValueCalculator _ohmValueCalculator;
+        private readonly CapacitorValueCalculator _capacitorValueCalculator;
+        
+        public ElectronicValueCalculator(OhmValueCalculator ohmValueCalculator, CapacitorValueCalculator capacitorValueCalculator)
         {
-            app.UseNancy();
-            app.UseStageMarker(PipelineStage.MapHandler);
-        }
+            _ohmValueCalculator = ohmValueCalculator;
+            _capacitorValueCalculator = capacitorValueCalculator;
 
-        public ElectronicValueCalculator()
-        {
             Get["/"] = x => string.Format("Electronic Calculator Ready");
 
             Get["/ohms"] = x => string.Format("resistor calculator");
@@ -34,10 +27,8 @@ namespace ElectronicsCalc
                 var bandBColor = parameters.bandBColor;
                 var bandCColor = parameters.bandCColor;
                 var bandDColor = parameters.bandDColor;
-
-                var ohmValueCalculator = new OhmValueCalculator();
-                return Response.AsJson((ValueData)ohmValueCalculator.CalculateValue(bandAColor, bandBColor, bandCColor, bandDColor));
-
+                
+                return Response.AsJson((ValueData)_ohmValueCalculator.CalculateValue(bandAColor, bandBColor, bandCColor, bandDColor));
             };
 
             Get["/farads/{bandAColor}/{bandBColor}/{bandCColor}/{bandDColor}"] = parameters =>
@@ -46,9 +37,8 @@ namespace ElectronicsCalc
                 var bandBColor = parameters.bandBColor;
                 var bandCColor = parameters.bandCColor;
                 var bandDColor = parameters.bandDColor;
-
-                var capacitorValueCalculator = new CapacitorValueCalculator();
-                return Response.AsJson((ValueData)capacitorValueCalculator.CalculateValue(bandAColor, bandBColor, bandCColor, bandDColor));
+                
+                return Response.AsJson((ValueData)_capacitorValueCalculator.CalculateValue(bandAColor, bandBColor, bandCColor, bandDColor));
 
             };
         }
