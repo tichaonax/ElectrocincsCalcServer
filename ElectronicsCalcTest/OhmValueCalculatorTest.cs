@@ -59,5 +59,18 @@ namespace ElectronicsCalcTest
             var ohmValueCalculator = new OhmValueCalculator();
             var valueData = ohmValueCalculator.CalculateValue("black", "white", "none", "gold");
         }
+
+        //
+        // "yellow=4", "violet=7", "red=2", "gold=5%"
+        // return 4700 ohms +- 5%
+        //
+        [TestMethod]
+        public void TestForFourThousandSevenHundredOhmsToleranceFivePercent()
+        {
+            var ohmValueCalculator = new OhmValueCalculator();
+            var valueData = ohmValueCalculator.CalculateValue("yellow", "violet", "red", "gold");
+            Assert.AreEqual(valueData.Value, 4700);
+            Assert.AreEqual(valueData.Tolerance, "5%");
+        }
     }
 }
