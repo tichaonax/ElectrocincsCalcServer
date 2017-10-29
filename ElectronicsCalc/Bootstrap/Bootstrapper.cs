@@ -21,7 +21,7 @@ namespace ElectronicsCalc.Bootstrap
 
         protected override void ConfigureRequestContainer(TinyIoCContainer container, NancyContext context)
         {
-            //manually register all  dependancise we need are per-web-request
+            //manually register all dependancise
             container.Register<OhmValueCalculator>();
             container.Register<CapacitorValueCalculator>();
         }
