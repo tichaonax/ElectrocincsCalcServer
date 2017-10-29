@@ -22,7 +22,7 @@ namespace ElectronicsCalc.ColorCoding
             ToleranceMap.Add("green", "0.5%");
             ToleranceMap.Add("blue", "0.25%");
             ToleranceMap.Add("violet", "0.1%");
-            ToleranceMap.Add("gray", "0.05");
+            ToleranceMap.Add("gray", "0.05%");
             ToleranceMap.Add("white", "0.05%-10%");
         }
     }
