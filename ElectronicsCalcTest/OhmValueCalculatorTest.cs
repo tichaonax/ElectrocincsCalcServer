@@ -7,12 +7,12 @@ namespace ElectronicsCalcTest
     [TestClass]
     public class OhmValueCalculatorTest
     {
-        [TestMethod]
-
         //
         // "brown=1", "green=5", "orange=3", "gold=5%"
         // return 15000 ohms
-        public void TestMethod1()
+        //
+        [TestMethod]
+        public void TestForFifteenThousandOhmsToleranceFivePercent()
         {
             var ohmValueCalculator = new OhmValueCalculator();
             var valueData = ohmValueCalculator.CalculateValue("brown", "green", "orange", "gold");
@@ -20,11 +20,12 @@ namespace ElectronicsCalcTest
             Assert.AreEqual(valueData.Tolerance, "5%");
         }
 
-        [TestMethod]
         //
         // "red=2", "black=0", "pink=-3", "silver=10%"
         // return 0.02 ohms
-        public void TestMethod2()
+        //
+        [TestMethod]
+        public void TestForZeroPointZeroTwoOhmsToleranceTenPercent()
         {
             var ohmValueCalculator = new OhmValueCalculator();
             var valueData = ohmValueCalculator.CalculateValue("red", "black", "pink", "silver");
@@ -32,11 +33,13 @@ namespace ElectronicsCalcTest
             Assert.AreEqual(valueData.Tolerance, "10%");
         }
 
-        [TestMethod]
+
         //
         // "gray=8", "white=9", "black=0", "brown=1%"
         // return 89 ohms
-        public void TestMethod3()
+        //
+        [TestMethod]
+        public void TestForEightyNineOhmsToleranceOnePercent()
         {
             var ohmValueCalculator = new OhmValueCalculator();
             var valueData = ohmValueCalculator.CalculateValue("gray", "white", "black", "brown");
@@ -44,5 +47,17 @@ namespace ElectronicsCalcTest
             Assert.AreEqual(valueData.Tolerance, "1%");
         }
 
+
+        //
+        // "black=0", "white=9", "none=-", "gold=2%"
+        // Exception expected
+        //
+        [TestMethod]
+        [ExpectedException(typeof(System.Exception))]
+        public void TestForInvalidInputsThrowsException()
+        {
+            var ohmValueCalculator = new OhmValueCalculator();
+            var valueData = ohmValueCalculator.CalculateValue("black", "white", "none", "gold");
+        }
     }
 }
